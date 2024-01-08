@@ -113,7 +113,12 @@ public class Main {
                 }
             }
 
+            WebElement puzzleNumberElement = driver.findElement(By.xpath("//a[@title='Copy link for this puzzle']"));
+            String puzzleNumber = puzzleNumberElement.getText().split(" ")[2];
+
             driver.quit();
+
+            System.out.println("Puzzle number: " + puzzleNumber);
 
             Sudoku sudoku = new Sudoku(values);
 
