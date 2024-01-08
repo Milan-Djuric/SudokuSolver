@@ -74,7 +74,7 @@ public class SudokuSolver {
                         if (sudoku.getCells()[i][j].getValue() == 0) for (int value : values.keySet())
                             if (sudoku.getCells()[i][j].getOptions().contains(value)) {
                                 mainFrame.setSelection(i, j);
-                                System.out.println("Last Remaining Value in Subgrid");
+                                System.out.println("Last Remaining Value in Subgrid at i=" + i + " j=" + j);
                                 Utils.sleep(waitTime);
                                 assignValue(new Position(i, j), value);
                                 mainFrame.refreshTable(sudoku.getCells());
@@ -109,7 +109,7 @@ public class SudokuSolver {
                 if (sudoku.getCells()[r][j].getValue() == 0) for (int value : values.keySet())
                     if (sudoku.getCells()[r][j].getOptions().contains(value)) {
                         mainFrame.setSelection(r, j);
-                        System.out.println("Last Remaining Value in Row");
+                        System.out.println("Last Remaining Value in Row at i=" + r + " j=" + j);
                         Utils.sleep(waitTime);
                         assignValue(new Position(r, j), value);
                         mainFrame.refreshTable(sudoku.getCells());
@@ -143,7 +143,7 @@ public class SudokuSolver {
                 if (sudoku.getCells()[i][c].getValue() == 0) for (int value : values.keySet())
                     if (sudoku.getCells()[i][c].getOptions().contains(value)) {
                         mainFrame.setSelection(i, c);
-                        System.out.println("Last Remaining Value in Column");
+                        System.out.println("Last Remaining Value in Column at i=" + i + " j=" + c);
                         Utils.sleep(waitTime);
                         assignValue(new Position(i, c), value);
                         mainFrame.refreshTable(sudoku.getCells());
@@ -162,7 +162,7 @@ public class SudokuSolver {
             for (int j = 0; j < 9; j++)
                 if (sudoku.getCells()[i][j].getValue() == 0) if (sudoku.getCells()[i][j].getOptions().size() == 1) {
                     mainFrame.setSelection(i, j);
-                    System.out.println("Obvious Singles");
+                    System.out.println("Obvious Singles at i=" + i + " j=" + j);
                     Utils.sleep(waitTime);
                     assignValue(new Position(i, j), sudoku.getCells()[i][j].getOptions().get(0));
                     mainFrame.refreshTable(sudoku.getCells());
@@ -206,7 +206,7 @@ public class SudokuSolver {
 
                         //if there are exactly two of these positions remove these two options from all other positions in this subgrid
                         if (cnt == 2) {
-                            System.out.println("Obvious Pairs in Subgrid");
+                            System.out.println("Obvious Pairs in Subgrid r=" + r + " c=" + c + " for values: " + optionsInArea.get(m) + ", " + optionsInArea.get(n));
                             for (int i = 3 * r; i < 3 * r + 3; i++)
                                 for (int j = 3 * c; j < 3 * c + 3; j++)
                                     if (sudoku.getCells()[i][j].getValue() == 0)
@@ -250,7 +250,7 @@ public class SudokuSolver {
 
                     //if there are exactly two of these positions remove these two options from all other positions in this row
                     if (cnt == 2) {
-                        System.out.println("Obvious Pairs in Row");
+                        System.out.println("Obvious Pairs in Row r=" + r + " for values: " + optionsInArea.get(m) + ", " + optionsInArea.get(n));
                         for (int j = 0; j < 9; j++)
                             if (sudoku.getCells()[r][j].getValue() == 0)
                                 if (sudoku.getCells()[r][j].getOptions().contains(optionsInArea.get(m)) || sudoku.getCells()[r][j].getOptions().contains(optionsInArea.get(n))) {
@@ -290,7 +290,7 @@ public class SudokuSolver {
 
                     //if there are exactly two of these positions remove these two options from all other positions in this column
                     if (cnt == 2) {
-                        System.out.println("Obvious Pairs in Column");
+                        System.out.println("Obvious Pairs in Column c=" + c + " for values: " + optionsInArea.get(m) + ", " + optionsInArea.get(n));
                         for (int i = 0; i < 9; i++)
                             if (sudoku.getCells()[i][c].getValue() == 0)
                                 if (!(sudoku.getCells()[i][c].getOptions().size() == 2 && sudoku.getCells()[i][c].getOptions().contains(optionsInArea.get(m)) && sudoku.getCells()[i][c].getOptions().contains(optionsInArea.get(n)))) {
@@ -344,7 +344,7 @@ public class SudokuSolver {
 
                         //if there are exactly two of these positions remove all other options from these positions
                         if (cnt == 2) {
-                            System.out.println("Hidden Pairs in Subgrid");
+                            System.out.println("Hidden Pairs in Subgrid r=" + r + " c=" + c + " for values: " + optionsInArea.get(m) + ", " + optionsInArea.get(n));
                             for (int i = 3 * r; i < 3 * r + 3; i++)
                                 for (int j = 3 * c; j < 3 * c + 3; j++)
                                     if (sudoku.getCells()[i][j].getValue() == 0) {
@@ -391,7 +391,7 @@ public class SudokuSolver {
 
                     //if there are exactly two of these positions remove all other options from these positions
                     if (cnt == 2) {
-                        System.out.println("Hidden Pairs in Row");
+                        System.out.println("Hidden Pairs in Row r=" + r + " for values: " + optionsInArea.get(m) + ", " + optionsInArea.get(n));
                         for (int j = 0; j < 9; j++)
                             if (sudoku.getCells()[r][j].getValue() == 0)
                                 if (sudoku.getCells()[r][j].getOptions().size() != 2 && sudoku.getCells()[r][j].getOptions().contains(optionsInArea.get(m)) && sudoku.getCells()[r][j].getOptions().contains(optionsInArea.get(n))) {
@@ -434,7 +434,7 @@ public class SudokuSolver {
 
                     //if there are exactly two of these positions remove all other options from these positions
                     if (cnt == 2) {
-                        System.out.println("Obvious Pairs in Column");
+                        System.out.println("Obvious Pairs in Column c=" + c + " for values: " + optionsInArea.get(m) + ", " + optionsInArea.get(n));
                         for (int i = 0; i < 9; i++)
                             if (sudoku.getCells()[i][c].getValue() == 0)
                                 if (sudoku.getCells()[i][c].getOptions().size() != 2 && sudoku.getCells()[i][c].getOptions().contains(optionsInArea.get(m)) && sudoku.getCells()[i][c].getOptions().contains(optionsInArea.get(n))) {
@@ -492,7 +492,7 @@ public class SudokuSolver {
 
                             //if there are exactly three of these positions remove these three options from all other positions in this subgrid
                             if (cnt == 3) {
-                                System.out.println("Obvious Triples in Subgrid");
+                                System.out.println("Obvious Triples in Subgrid r=" + r + " c=" + c + " for values: " + optionsInArea.get(m) + ", " + optionsInArea.get(n) + ", " + optionsInArea.get(o));
                                 for (int i = 3 * r; i < 3 * r + 3; i++)
                                     for (int j = 3 * c; j < 3 * c + 3; j++)
                                         if (sudoku.getCells()[i][j].getValue() == 0)
@@ -538,7 +538,7 @@ public class SudokuSolver {
 
                         //if there are exactly three of these positions remove these options from all other positions in this row
                         if (cnt == 3) {
-                            System.out.println("Obvious Triples in Row");
+                            System.out.println("Obvious Triples in Row r=" + r + " for values: " + optionsInArea.get(m) + ", " + optionsInArea.get(n) + ", " + optionsInArea.get(o));
                             for (int j = 0; j < 9; j++)
                                 if (sudoku.getCells()[r][j].getValue() == 0)
                                     if (!(sudoku.getCells()[r][j].getOptions().size() == 3 && sudoku.getCells()[r][j].getOptions().contains(optionsInArea.get(m)) && sudoku.getCells()[r][j].getOptions().contains(optionsInArea.get(n)) && sudoku.getCells()[r][j].getOptions().contains(optionsInArea.get(o)))) {
@@ -581,7 +581,7 @@ public class SudokuSolver {
 
                         //if there are exactly three of these positions remove these options from all other positions in this row
                         if (cnt == 3) {
-                            System.out.println("Obvious Triples in Column");
+                            System.out.println("Obvious Triples in Column c=" + c + " for values: " + optionsInArea.get(m) + ", " + optionsInArea.get(n) + ", " + optionsInArea.get(o));
                             for (int i = 0; i < 9; i++)
                                 if (sudoku.getCells()[i][c].getValue() == 0)
                                     if (!(sudoku.getCells()[i][c].getOptions().size() == 3 && sudoku.getCells()[i][c].getOptions().contains(optionsInArea.get(m)) && sudoku.getCells()[i][c].getOptions().contains(optionsInArea.get(n)) && sudoku.getCells()[i][c].getOptions().contains(optionsInArea.get(o)))) {
